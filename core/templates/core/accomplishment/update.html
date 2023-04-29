@@ -1,0 +1,14 @@
+{% extends "core/skeleton.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Update Accomplishment | Pat Yourself on the Back{% endblock %}
+{% block body %}
+
+<main>
+    <div class="container py-2">
+        {% crispy form %}
+    </div>
+</main>
+
+{% endblock %}

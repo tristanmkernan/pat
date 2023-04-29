@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{ object.name }}</h5>
+    <p class="card-text text-italic">
+      {{ object.created_at.date }}
+    </p>
+    {% if object.notes %}
+      <p class="card-text">
+        {{ object.notes }}
+      </p>
+    {% endif %}
+    {% if object.tags.names %}
+      <div class="d-flex flex-wrap gap-1">
+        {% for tag in object.tags.names %}
+          <span class="badge rounded-pill bg-secondary">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex flex-row align-items-center">
+      <div class="" style="flex: 1;">
+        Challenge
+      </div>
+      <div class="progress" style="flex: 1;" role="progressbar" aria-label="Default striped example" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped" style="width: {% widthratio object.challenge 10 100 %}%"></div>
+      </div>
+    </li>
+    <li class="list-group-item d-flex flex-row align-items-center">
+      <div class="" style="flex: 1;">
+        Reward
+      </div>
+      <div class="progress" style="flex: 1;" role="progressbar" aria-label="Default striped example" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped" style="width: {% widthratio object.reward 10 100 %}%"></div>
+      </div>
+    </li>
+  </ul>
+  {% if not hide_actions %}
+  <div class="card-body">
+    <a href="{% url 'accomplishment_update' object.uuid %}" class="card-link">Update</a>
+    <a href="{% url 'accomplishment_delete' object.uuid %}" class="card-link">Delete</a>
+  </div>
+  {% endif %}
+</div>
