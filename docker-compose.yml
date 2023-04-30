@@ -5,7 +5,7 @@ services:
     build: .
     restart: unless-stopped
     ports:
-      - "8000:8000"
+      - "13000:8000"
     environment:
       - SETTINGS_MODULE=something
     volumes:
