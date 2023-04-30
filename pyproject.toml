@@ -18,6 +18,7 @@ python-decouple = "^3.8"
 whitenoise = "^6.4.0"
 django-guardian = "^2.4.0"
 django-taggit = "^3.1.0"
+django-tables2 = "^2.5.3"
 
 
 [tool.poetry.group.dev.dependencies]

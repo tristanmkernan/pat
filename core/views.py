@@ -1,17 +1,13 @@
-from datetime import datetime
-
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     TemplateView,
-    ListView,
     CreateView,
     UpdateView,
     DeleteView,
-    DetailView,
-    FormView,
 )
+from django_tables2 import SingleTableView
 from guardian.shortcuts import get_objects_for_user
 
 from .forms import (
@@ -20,38 +16,51 @@ from .forms import (
     AccomplishmentDeleteForm,
 )
 from .models import Accomplishment
+from .tables import AccomplishmentTable
 
 
 class IndexView(TemplateView):
     template_name = "core/index.html"
 
 
-class DashboardView(LoginRequiredMixin, ListView):
+class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = "core/dashboard.html"
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+
+        base_qs = get_objects_for_user(self.request.user, "core.view_accomplishment")
+
+        context_data["accomplishment_sections"] = [
+            {
+                "title": "Recent Accomplishments",
+                "qs": base_qs.order_by("-created_at")[:3],
+            },
+            {
+                "title": "Challenging Accomplishments",
+                "qs": base_qs.order_by("-challenge")[:3],
+            },
+            {
+                "title": "Rewarding Accomplishments",
+                "qs": base_qs.order_by("-reward")[:3],
+            },
+        ]
+
+        return context_data
+
+
+# TODO filters
+# TODO table
+class AccomplishmentListView(LoginRequiredMixin, SingleTableView):
+    template_name = "core/accomplishment/list.html"
+    table_class = AccomplishmentTable
+
     def get_queryset(self):
         qs = get_objects_for_user(
             self.request.user, "core.view_accomplishment"
         ).order_by("-created_at")
 
-        return qs[:10]
-
-
-class AccomplishmentListFragmentView(LoginRequiredMixin, ListView):
-    template_name = "core/accomplishment/list_fragment.html"
-
-    def get_queryset(self):
-        qs = get_objects_for_user(
-            self.request.user, "core.view_accomplishment"
-        ).order_by("-created_at")
-
-        after = datetime.fromisoformat(self.request.GET.get("after"))
-
-        ## since we sort by timestamp descending, we want results which were created
-        ## before the cursor
-        qs = qs.filter(created_at__lt=after)
-
-        return qs[:10]
+        return qs
 
 
 class AccomplishmentCreateView(LoginRequiredMixin, CreateView):

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "guardian",
     "taggit",
     "django_htmx",
+    "django_tables2",
 ]
 
 MIDDLEWARE = [
@@ -183,3 +184,7 @@ TAGGIT_CASE_INSENSITIVE = True
 # Security
 
 CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", cast=Csv())
+
+# Django tables
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap5.html"

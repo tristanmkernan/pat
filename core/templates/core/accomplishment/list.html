@@ -1,0 +1,14 @@
+{% extends "core/skeleton.html" %}
+
+{% load django_tables2 %}
+
+{% block title %}View Accomplishments | Pat Yourself on the Back{% endblock %}
+{% block body %}
+
+  <main>
+    <div class="container my-4">
+      {% render_table table %}
+    </div>
+  </main>
+
+{% endblock %}

@@ -6,9 +6,9 @@ urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
     path("dashboard/", views.DashboardView.as_view(), name="dashboard"),
     path(
-        "dashboard/accomplishment/fragment/list/",
-        views.AccomplishmentListFragmentView.as_view(),
-        name="accomplishment_list_fragment",
+        "dashboard/accomplishment/",
+        views.AccomplishmentListView.as_view(),
+        name="accomplishment_list",
     ),
     path(
         "dashboard/accomplishment/create",
