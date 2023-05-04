@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "taggit",
     "django_htmx",
     "django_tables2",
+    "django_filters",
 ]
 
 MIDDLEWARE = [

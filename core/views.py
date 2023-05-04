@@ -1,15 +1,19 @@
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
+    ListView,
     TemplateView,
     CreateView,
     UpdateView,
     DeleteView,
 )
-from django_tables2 import SingleTableView
+from django_tables2 import RequestConfig
 from guardian.shortcuts import get_objects_for_user
 
+from .filters import AccomplishmentFilter
 from .forms import (
     AccomplishmentCreateForm,
     AccomplishmentUpdateForm,
@@ -50,15 +54,29 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
 
 # TODO filters
-# TODO table
-class AccomplishmentListView(LoginRequiredMixin, SingleTableView):
+class AccomplishmentListView(LoginRequiredMixin, ListView):
     template_name = "core/accomplishment/list.html"
-    table_class = AccomplishmentTable
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        filter = AccomplishmentFilter(
+            self.request.GET, queryset=self.get_queryset(), request=self.request
+        )
+        filter.form.helper = FormHelper()
+        filter.form.helper.form_method = "GET"
+        filter.form.helper.add_input(Submit("submit", "Filter"))
+
+        table = AccomplishmentTable(filter.qs)
+        RequestConfig(self.request).configure(table)
+
+        context["filter"] = filter
+        context["table"] = table
+
+        return context
 
     def get_queryset(self):
-        qs = get_objects_for_user(
-            self.request.user, "core.view_accomplishment"
-        ).order_by("-created_at")
+        qs = get_objects_for_user(self.request.user, "core.view_accomplishment")
 
         return qs
 
