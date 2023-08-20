@@ -53,7 +53,6 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         return context_data
 
 
-# TODO filters
 class AccomplishmentListView(LoginRequiredMixin, ListView):
     template_name = "core/accomplishment/list.html"
 
