@@ -5,14 +5,14 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /code
 
-RUN apt-get update
-RUN apt-get install -y \
-    libmagic-dev \
-    libjpeg-dev \
-    zlib1g-dev \
-    libffi-dev \
-    gfortran \
-    libopenblas-dev
+# RUN apt-get update
+# RUN apt-get install -y \
+#     libmagic-dev \
+#     libjpeg-dev \
+#     zlib1g-dev \
+#     libffi-dev \
+#     gfortran \
+#     libopenblas-dev
 
 COPY requirements.txt /code/
 
