@@ -8,7 +8,7 @@ class AccomplishmentTable(tables.Table):
     class Meta:
         model = Accomplishment
         order_by = "-created_at"
-        fields = ["name", "challenge", "reward", "notes", "tags", "created_at"]
+        fields = ["name", "challenge", "reward", "notes", "tags", "accomplishment_date"]
 
     name = tables.Column(
         linkify=lambda record: reverse("accomplishment_update", args=[record.uuid])
@@ -22,4 +22,4 @@ class AccomplishmentTable(tables.Table):
         orderable=False,
     )
     notes = tables.Column(orderable=False)
-    created_at = tables.DateColumn()
+    accomplishment_date = tables.DateColumn(verbose_name="Date")

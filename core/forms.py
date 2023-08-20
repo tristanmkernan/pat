@@ -1,10 +1,7 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Fieldset, Field
-from crispy_bootstrap5.bootstrap5 import FloatingField
+from crispy_forms.layout import Submit, Layout, Fieldset
 from django import forms
-from django.forms.widgets import ClearableFileInput
-from django.urls import reverse_lazy
-
+from django.utils import timezone
 
 from .models import Accomplishment
 
@@ -14,6 +11,11 @@ class RangeInput(forms.NumberInput):
 
 
 class AccomplishmentCreateForm(forms.ModelForm):
+    accomplishment_date = forms.DateField(
+        initial=timezone.localdate,
+        widget=forms.DateInput(attrs={"type": "date"}),
+    )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -22,6 +24,7 @@ class AccomplishmentCreateForm(forms.ModelForm):
             Fieldset(
                 "Add Accomplishment",
                 "name",
+                "accomplishment_date",
                 "challenge",
                 "reward",
                 "notes",
@@ -34,6 +37,7 @@ class AccomplishmentCreateForm(forms.ModelForm):
         model = Accomplishment
         fields = [
             "name",
+            "accomplishment_date",
             "challenge",
             "reward",
             "notes",
@@ -45,17 +49,6 @@ class AccomplishmentCreateForm(forms.ModelForm):
             "reward": RangeInput(attrs={"min": 0, "max": 10, "class": "form-range"}),
         }
 
-    # content_ = forms.ImageField(
-    #     widget=ClearableFileInput(
-    #         attrs={
-    #             "hx-post": reverse_lazy("meme_create_suggested_tags"),
-    #             "hx-target": "#suggested-tags",
-    #             "hx-encoding": "multipart/form-data",
-    #             "hx-swap": "outerHTML",
-    #         }
-    #     )
-    # )
-
 
 class AccomplishmentUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -66,6 +59,7 @@ class AccomplishmentUpdateForm(forms.ModelForm):
             Fieldset(
                 "Update Accomplishment",
                 "name",
+                "accomplishment_date",
                 "challenge",
                 "reward",
                 "notes",
@@ -78,6 +72,7 @@ class AccomplishmentUpdateForm(forms.ModelForm):
         model = Accomplishment
         fields = [
             "name",
+            "accomplishment_date",
             "challenge",
             "reward",
             "notes",
@@ -85,6 +80,7 @@ class AccomplishmentUpdateForm(forms.ModelForm):
         ]
         widgets = {
             "name": forms.TextInput(),
+            "accomplishment_date": forms.DateInput(attrs={"type": "date"}),
             "challenge": RangeInput(attrs={"min": 0, "max": 10, "class": "form-range"}),
             "reward": RangeInput(attrs={"min": 0, "max": 10, "class": "form-range"}),
         }

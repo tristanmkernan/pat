@@ -15,6 +15,7 @@ class Accomplishment(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     name = models.TextField()
+    accomplishment_date = models.DateField()
     challenge = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(10)]
     )
@@ -28,4 +29,4 @@ class Accomplishment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.owner}'s pat {self.uuid}"
+        return f"{self.owner}'s accomplishment {self.uuid}"
