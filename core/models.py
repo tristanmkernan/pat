@@ -1,3 +1,5 @@
+import os
+
 from uuid import uuid4
 
 from django.db import models
@@ -7,6 +9,12 @@ from django.contrib.auth import get_user_model
 from taggit.managers import TaggableManager
 
 User = get_user_model()
+
+
+def user_directory_path(instance, filename):
+    ext = os.path.splitext(filename)[1]
+    unique = str(uuid4())
+    return f"accomplishments/user-{instance.owner.uuid}/{unique}{ext}"
 
 
 class Accomplishment(models.Model):
@@ -25,6 +33,8 @@ class Accomplishment(models.Model):
     notes = models.TextField(blank=True)
 
     tags = TaggableManager(blank=True)
+
+    image = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
 

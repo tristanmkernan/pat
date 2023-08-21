@@ -1,6 +1,7 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset
 from django import forms
+from django.forms.widgets import ClearableFileInput
 from django.utils import timezone
 
 from .models import Accomplishment
@@ -28,6 +29,7 @@ class AccomplishmentCreateForm(forms.ModelForm):
                 "challenge",
                 "reward",
                 "notes",
+                "image",
                 "tags",
             ),
             Submit("submit", "Submit"),
@@ -41,12 +43,14 @@ class AccomplishmentCreateForm(forms.ModelForm):
             "challenge",
             "reward",
             "notes",
+            "image",
             "tags",
         ]
         widgets = {
             "name": forms.TextInput(),
             "challenge": RangeInput(attrs={"min": 0, "max": 10, "class": "form-range"}),
             "reward": RangeInput(attrs={"min": 0, "max": 10, "class": "form-range"}),
+            "image": ClearableFileInput(),
         }
 
 
@@ -63,6 +67,7 @@ class AccomplishmentUpdateForm(forms.ModelForm):
                 "challenge",
                 "reward",
                 "notes",
+                "image",
                 "tags",
             ),
             Submit("submit", "Submit"),
@@ -76,6 +81,7 @@ class AccomplishmentUpdateForm(forms.ModelForm):
             "challenge",
             "reward",
             "notes",
+            "image",
             "tags",
         ]
         widgets = {
@@ -83,6 +89,7 @@ class AccomplishmentUpdateForm(forms.ModelForm):
             "accomplishment_date": forms.DateInput(attrs={"type": "date"}),
             "challenge": RangeInput(attrs={"min": 0, "max": 10, "class": "form-range"}),
             "reward": RangeInput(attrs={"min": 0, "max": 10, "class": "form-range"}),
+            "image": ClearableFileInput(),
         }
 
 

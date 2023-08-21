@@ -1,4 +1,7 @@
 <div class="card">
+  {% if object.image %}
+    <img src="{{ object.image.url }}" class="card-img-top" alt="Accomplishment image accompaniment">
+  {% endif %}
   <div class="card-body">
     <h5 class="card-title">{{ object.name }}</h5>
     <p class="card-text text-italic">

@@ -7,6 +7,6 @@ services:
     ports:
       - "13000:8000"
     environment:
-      - SETTINGS_MODULE=something
+      - DJANGO_SETTINGS_MODULE=pat.settings
     volumes:
       - ./db.sqlite3:/code/db.sqlite3
