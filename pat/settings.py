@@ -200,10 +200,17 @@ STORAGES = {
     },
 }
 
+AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME")
+AWS_S3_ENDPOINT = config("AWS_S3_ENDPOINT")
 AWS_S3_ACCESS_KEY_ID = config("AWS_S3_ACCESS_KEY_ID")
 AWS_S3_SECRET_ACCESS_KEY = config("AWS_S3_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_ENDPOINT_URL = config("AWS_S3_ENDPOINT_URL")
+
+
+AWS_S3_OBJECT_PARAMETERS = {
+    "CacheControl": "max-age=86400",
+}
 
 # would like to use, but cannot with minio and cloudflare:
 # https://stackoverflow.com/a/76608351
