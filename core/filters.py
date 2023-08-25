@@ -1,16 +1,14 @@
 import django_filters
 
-from guardian.shortcuts import get_objects_for_user
 from taggit.models import Tag
 
 from .models import Accomplishment
+from .data_views import get_tags_for_user
 
 
 def get_user_tags(request):
     if request is not None:
-        base_qs = get_objects_for_user(request.user, "core.view_accomplishment")
-
-        return Tag.objects.filter(accomplishment__in=base_qs).distinct()
+        return get_tags_for_user(request.user)
 
     return Tag.objects.none()
 

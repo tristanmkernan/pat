@@ -18,7 +18,13 @@ class AccomplishmentCreateForm(forms.ModelForm):
     )
 
     def __init__(self, *args, **kwargs):
+        common_tags = kwargs.pop("common_tags", None)
+
         super().__init__(*args, **kwargs)
+
+        if common_tags:
+            common_tags_display = ", ".join([tag.name for tag in common_tags])
+            self.fields["tags"].help_text += f" Common tags: {common_tags_display}."
 
         self.helper = FormHelper()
         self.helper.layout = Layout(
