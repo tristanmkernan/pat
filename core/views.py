@@ -39,7 +39,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context_data = super().get_context_data(**kwargs)
 
         base_qs = get_objects_for_user(self.request.user, "core.view_accomplishment")
-        week_ago = timezone.now() - timedelta(days=7)
+        week_ago = (timezone.now() - timedelta(days=7)).date()
 
         context_data["accomplishment_sections"] = [
             {
