@@ -101,6 +101,9 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / config("DB_NAME", "db.sqlite3", cast=str),
+        "OPTIONS": {
+            "timeout": 5,  # recommended by Litestream
+        },
     }
 }
 

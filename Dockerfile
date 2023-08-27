@@ -18,6 +18,13 @@ COPY requirements.txt /code/
 
 RUN pip install -r requirements.txt
 
+# Download the static build of Litestream directly into the path & make it executable.
+ADD https://github.com/benbjohnson/litestream/releases/download/v0.3.11/litestream-v0.3.11-linux-amd64.tar.gz /tmp/litestream.tar.gz
+RUN tar -C /usr/local/bin -xzf /tmp/litestream.tar.gz
+
+# Copy Litestream configuration file & startup script.
+COPY litestream.yml /etc/litestream.yml
+
 COPY . /code/
 
 COPY .env.prod .env

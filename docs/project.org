@@ -1,0 +1,55 @@
+#+title: Pat Yourself on the Back
+
+* Todo
+
+- [X] [Litestream setup](https://litestream.io/)
+- [ ] Calendar view
+- [ ] Gallery view
+- [ ] Rewards
+
+** Spec notes
+
+*** Calendar view / Goals / Habits
+
+Allow the user to set a few (3?) tags as "goals" or "habits" to improve / work on / work towards.
+
+Show the user on a minimalist calendar the Accomplishments for the given goal(s).
+
+This is partially inspired by the Wordle share-able grid. The minimalist calendar could similarly be constructed from unicode/emoji squares, where gray=no accomplishment and green=accomplishment.
+
+Goals could be configured to be daily, weekly, or monthly, which would affect this display. For a weekly goal, if there is any Accomplishment in that week, then the entire week is green.
+
+*Thought* maybe this isn't the appropriate use for Goals, maybe this should be Habits.
+
+**** Alternative
+
+Goals can be closed / linked to Accomplishments like Github Issues/PRs
+
+Creating an Accomplishment can "close" a Goal
+
+**** Alternative
+
+Allow the user to create N (3?) Goals that are accomplishments to resolve. User can "archive" goals not achieved, but cannot overload themselves with too many active Goals.
+
+
+*** Gallery view
+
+Allow the user to view their Accomplishment history in a gallery of images. This serves to provide a history of positive memories via visual display.
+
+Accomplishments should be updated to support multiple images and video (webm?).
+
+This view should have a tags chips list for filtering, e.g. show most common tags in a horizontally scrollable list and clicking one selects or deselects for filtering.
+
+This view could replace the table list view. The gallery mode would be a toggle from the list mode.
+
+Clicking an item in the gallery opens a lightbox with more details about the Accomplishment.
+
+*** Rewards
+
+Allow user to add rewards.
+
+Simple: rewards are considered "used" or "claimed" upon adding.
+
+Stretch: rewards are created in an unclaimed state. Rewards may be claimed at some later point.
+
+Stretch: rewards are tied to accomplishments / goals. User must submit X accomplishments in Y period to be eligible for reward.
