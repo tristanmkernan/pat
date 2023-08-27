@@ -20,7 +20,7 @@ DOTENV_FILE = os.environ.get("DOTENV_FILE", ".env")  # only place using os.envir
 config = Config(RepositoryEnv(DOTENV_FILE))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
