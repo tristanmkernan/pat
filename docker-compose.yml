@@ -2,7 +2,11 @@ version: "3.9"
 
 services:
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        LITESTREAM_PLATFORM: ${LITESTREAM_PLATFORM:-arm64}
     restart: unless-stopped
     ports:
       - "13000:8000"

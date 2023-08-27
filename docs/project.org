@@ -3,6 +3,7 @@
 * Todo
 
 - [X] [Litestream setup](https://litestream.io/)
+- [ ] Email verification
 - [ ] Calendar view
 - [ ] Gallery view
 - [ ] Rewards
