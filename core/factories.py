@@ -1,8 +1,7 @@
 from datetime import timedelta
-from django.utils import timezone
 
 import factory
-
+from django.utils import timezone
 from taggit.models import Tag
 
 from .models import Accomplishment

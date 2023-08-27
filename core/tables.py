@@ -1,5 +1,5 @@
-from django.urls import reverse
 import django_tables2 as tables
+from django.urls import reverse
 
 from .models import Accomplishment
 

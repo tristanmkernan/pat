@@ -2,16 +2,16 @@ from datetime import timedelta
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.views.generic import (
+    CreateView,
+    DeleteView,
     ListView,
     TemplateView,
-    CreateView,
     UpdateView,
-    DeleteView,
 )
 from django_tables2 import RequestConfig
 from guardian.shortcuts import get_objects_for_user
@@ -21,8 +21,8 @@ from core.data_views import get_common_tags_for_user
 from .filters import AccomplishmentFilter
 from .forms import (
     AccomplishmentCreateForm,
-    AccomplishmentUpdateForm,
     AccomplishmentDeleteForm,
+    AccomplishmentUpdateForm,
 )
 from .models import Accomplishment
 from .tables import AccomplishmentTable

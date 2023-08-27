@@ -1,9 +1,8 @@
 import django_filters
-
 from taggit.models import Tag
 
-from .models import Accomplishment
 from .data_views import get_tags_for_user
+from .models import Accomplishment
 
 
 def get_user_tags(request):

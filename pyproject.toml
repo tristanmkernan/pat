@@ -30,7 +30,18 @@ pillow = "^10.0.0"
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
 ipdb = "^0.13.13"
+pytest = "^7.4.0"
+pytest-django = "^4.5.2"
+pre-commit = "^3.3.3"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 99
+select = ["F", "E", "W", "Q",]
+exclude = [
+    "**/migrations/*.py"
+]
+ignore = ["F401"]

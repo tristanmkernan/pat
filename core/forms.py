@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Fieldset
+from crispy_forms.layout import Fieldset, Layout, Submit
 from django import forms
 from django.forms.widgets import ClearableFileInput
 from django.utils import timezone
