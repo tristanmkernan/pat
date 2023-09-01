@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "django_tables2",
     "django_filters",
     "django_extensions",
+    "anymail",
 ]
 
 MIDDLEWARE = [
@@ -141,15 +142,17 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_CHANGE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+
+
+LOGIN_REDIRECT_URL = "dashboard"
 
 ACCOUNT_FORMS = {
     "login": "authy.forms.LoginForm",
     "signup": "authy.forms.SignupForm",
 }
 
-ACCOUNT_EMAIL_VERIFICATION = "none"
-
-LOGIN_REDIRECT_URL = "dashboard"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -223,3 +226,22 @@ AWS_S3_OBJECT_PARAMETERS = {
 # would like to use, but cannot with minio and cloudflare:
 # https://stackoverflow.com/a/76608351
 # AWS_S3_FILE_OVERWRITE = False
+
+# Caches
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://redis:6379",
+    }
+}
+
+# Email
+
+ANYMAIL = {
+    "MAILJET_API_KEY": config("MAILJET_API_KEY"),
+    "MAILJET_SECRET_KEY": config("MAILJET_SECRET_KEY"),
+}
+EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
+DEFAULT_FROM_EMAIL = "help@tmk.name"
+SERVER_EMAIL = "help@tmk.name"
