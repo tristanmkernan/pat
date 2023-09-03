@@ -182,7 +182,7 @@ defusedxml==0.7.1 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61
 django-allauth==0.54.0 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:120e265f802b65738899c6cb627b827fde46a4d03067034c633f516c2adf3e3e
-django-anymail[mailjet]==10.1 ; python_version >= "3.10" and python_version < "4.0" \
+django-anymail[mailersend]==10.1 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:5c4f26bd0f5507324ed1da31e430bca3293bb2c16f386e813484f2ea2df83d06 \
     --hash=sha256:e0a65c1e235dcb863dab67a3e193e899a48503b650df483d7b73f73983fd874b
 django-crispy-forms==2.0 ; python_version >= "3.10" and python_version < "4.0" \

@@ -239,9 +239,11 @@ CACHES = {
 # Email
 
 ANYMAIL = {
-    "MAILJET_API_KEY": config("MAILJET_API_KEY"),
-    "MAILJET_SECRET_KEY": config("MAILJET_SECRET_KEY"),
+    # "MAILJET_API_KEY": config("MAILJET_API_KEY"),
+    # "MAILJET_SECRET_KEY": config("MAILJET_SECRET_KEY"),
+    "MAILERSEND_API_TOKEN": config("MAILERSEND_API_TOKEN"),
 }
-EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
+# EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
+EMAIL_BACKEND = "anymail.backends.mailersend.EmailBackend"
 DEFAULT_FROM_EMAIL = "help@tmk.name"
 SERVER_EMAIL = "help@tmk.name"
