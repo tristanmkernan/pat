@@ -10,6 +10,15 @@
         <a class="btn btn-primary" href="{% url 'accomplishment_list' %}">View All</a>
       </div>
 
+      <h2>Activity</h2>
+      <div class="row flex-nowrap overflow-x-auto">
+        {% for calendar in activity_calendars %}
+          <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+          {{ calendar|safe }}
+          </div>
+        {% endfor %}
+      </div>
+
       {% for section in accomplishment_sections %}
         <h2>{{ section.title }}</h2>
         <div class="row flex-nowrap overflow-x-auto">

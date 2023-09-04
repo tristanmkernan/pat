@@ -17,6 +17,7 @@ from django_tables2 import RequestConfig
 from guardian.shortcuts import get_objects_for_user
 
 from core.data_views import get_common_tags_for_user
+from core.services import make_activity_calendars
 
 from .filters import AccomplishmentFilter
 from .forms import (
@@ -40,6 +41,12 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
         base_qs = get_objects_for_user(self.request.user, "core.view_accomplishment")
         week_ago = (timezone.now() - timedelta(days=7)).date()
+
+        active_dates = set(base_qs.values_list("accomplishment_date", flat=True))
+
+        context_data["activity_calendars"] = make_activity_calendars(
+            active_dates,
+        )
 
         context_data["accomplishment_sections"] = [
             {
