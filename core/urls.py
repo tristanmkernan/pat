@@ -26,8 +26,23 @@ urlpatterns = [
         name="accomplishment_delete",
     ),
     # path(
-    #     "dashboard/meme/<uuid:uuid>/content",
-    #     views.MemeContentView.as_view(),
-    #     name="meme_content",
+    #     "dashboard/compliment/",
+    #     views.ComplimentListView.as_view(),
+    #     name="compliment_list",
     # ),
+    path(
+        "dashboard/compliment/create",
+        views.ComplimentCreateView.as_view(),
+        name="compliment_create",
+    ),
+    path(
+        "dashboard/compliment/<uuid:uuid>/update",
+        views.ComplimentUpdateView.as_view(),
+        name="compliment_update",
+    ),
+    path(
+        "dashboard/compliment/<uuid:uuid>/delete",
+        views.ComplimentDeleteView.as_view(),
+        name="compliment_delete",
+    ),
 ]

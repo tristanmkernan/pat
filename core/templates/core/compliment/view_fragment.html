@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">From {{ object.source }}</h5>
+    <p class="card-text">
+      {{ object.description }}
+    </p>
+    {% if object.tags.names %}
+      <div class="d-flex flex-wrap gap-1">
+        {% for tag in object.tags.names %}
+          <span class="badge rounded-pill bg-secondary">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+  {% if not hide_actions %}
+  <div class="card-body">
+    <a href="{% url 'compliment_update' object.uuid %}" class="card-link">Update</a>
+    <a href="{% url 'compliment_delete' object.uuid %}" class="card-link">Delete</a>
+  </div>
+  {% endif %}
+</div>

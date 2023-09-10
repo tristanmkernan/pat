@@ -7,6 +7,8 @@
 - [ ] Calendar view
 - [ ] Gallery view
 - [ ] Rewards
+- [ ] Migration to configure django site
+- [ ] Integrate django messages with skeleton template
 
 ** Spec notes
 

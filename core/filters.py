@@ -1,13 +1,13 @@
 import django_filters
 from taggit.models import Tag
 
-from .data_views import get_tags_for_user
+from .data_views import get_accomplishment_tags_for_user
 from .models import Accomplishment
 
 
 def get_user_tags(request):
     if request is not None:
-        return get_tags_for_user(request.user)
+        return get_accomplishment_tags_for_user(request.user)
 
     return Tag.objects.none()
 

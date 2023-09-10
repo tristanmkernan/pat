@@ -16,16 +16,20 @@ from django.views.generic import (
 from django_tables2 import RequestConfig
 from guardian.shortcuts import get_objects_for_user
 
-from core.data_views import get_common_tags_for_user
+from core.data_views import (
+    get_common_accomplishment_tags_for_user,
+    get_common_compliment_tags_for_user,
+)
 from core.services import make_activity_calendars
 
 from .filters import AccomplishmentFilter
 from .forms import (
-    AccomplishmentCreateForm,
+    AccomplishmentForm,
     AccomplishmentDeleteForm,
-    AccomplishmentUpdateForm,
+    ComplimentForm,
+    ComplimentDeleteForm,
 )
-from .models import Accomplishment
+from .models import Accomplishment, Compliment
 from .tables import AccomplishmentTable
 
 
@@ -39,10 +43,17 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
 
-        base_qs = get_objects_for_user(self.request.user, "core.view_accomplishment")
+        base_accomplishment_qs = get_objects_for_user(
+            self.request.user, "core.view_accomplishment"
+        )
+        base_compliment_qs = get_objects_for_user(
+            self.request.user, "core.view_compliment"
+        )
         week_ago = (timezone.now() - timedelta(days=7)).date()
 
-        active_dates = set(base_qs.values_list("accomplishment_date", flat=True))
+        active_dates = set(
+            base_accomplishment_qs.values_list("accomplishment_date", flat=True)
+        )
 
         context_data["activity_calendars"] = make_activity_calendars(
             active_dates,
@@ -51,19 +62,24 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context_data["accomplishment_sections"] = [
             {
                 "title": "Recent",
-                "qs": base_qs.order_by("-created_at")[:3],
-            },
-            {
-                "title": "Most Rewarding",
-                "qs": base_qs.order_by("-reward")[:3],
-            },
-            {
-                "title": "Most Challenging",
-                "qs": base_qs.order_by("-challenge")[:3],
+                "qs": base_accomplishment_qs.order_by("-created_at")[:3],
             },
             {
                 "title": "Throwback",
-                "qs": base_qs.filter(accomplishment_date__lte=week_ago).order_by("?")[
+                "qs": base_accomplishment_qs.filter(
+                    accomplishment_date__lte=week_ago
+                ).order_by("?")[:3],
+            },
+        ]
+
+        context_data["compliment_sections"] = [
+            {
+                "title": "Recent",
+                "qs": base_compliment_qs.order_by("-created_at")[:3],
+            },
+            {
+                "title": "Throwback",
+                "qs": base_compliment_qs.filter(created_at__lte=week_ago).order_by("?")[
                     :3
                 ],
             },
@@ -102,20 +118,24 @@ class AccomplishmentListView(LoginRequiredMixin, ListView):
 class AccomplishmentCreateView(LoginRequiredMixin, CreateView):
     template_name = "core/accomplishment/create.html"
     model = Accomplishment
-    form_class = AccomplishmentCreateForm
+    form_class = AccomplishmentForm
     success_url = reverse_lazy("dashboard")
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
 
-        kwargs["common_tags"] = get_common_tags_for_user(self.request.user)
+        kwargs["common_tags"] = get_common_accomplishment_tags_for_user(
+            self.request.user
+        )
 
         return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["common_tags"] = get_common_tags_for_user(self.request.user)
+        context["common_tags"] = get_common_accomplishment_tags_for_user(
+            self.request.user
+        )
 
         return context
 
@@ -138,7 +158,7 @@ class AccomplishmentCreateView(LoginRequiredMixin, CreateView):
 class AccomplishmentUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "core/accomplishment/update.html"
     model = Accomplishment
-    form_class = AccomplishmentUpdateForm
+    form_class = AccomplishmentForm
     success_url = reverse_lazy("dashboard")
     slug_field = "uuid"
     slug_url_kwarg = "uuid"
@@ -157,3 +177,63 @@ class AccomplishmentDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_queryset(self):
         return get_objects_for_user(self.request.user, "core.delete_accomplishment")
+
+
+class ComplimentCreateView(LoginRequiredMixin, CreateView):
+    template_name = "core/compliment/create.html"
+    model = Compliment
+    form_class = ComplimentForm
+    success_url = reverse_lazy("dashboard")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+
+        kwargs["common_tags"] = get_common_compliment_tags_for_user(self.request.user)
+
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["common_tags"] = get_common_compliment_tags_for_user(self.request.user)
+
+        return context
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+
+        # set owner
+        self.object.owner = self.request.user
+
+        # persist object
+        self.object.save()
+
+        # m2m
+        ## Without this next line the tags won't be saved.
+        form.save_m2m()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class ComplimentUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "core/compliment/update.html"
+    model = Compliment
+    form_class = ComplimentForm
+    success_url = reverse_lazy("dashboard")
+    slug_field = "uuid"
+    slug_url_kwarg = "uuid"
+
+    def get_queryset(self):
+        return get_objects_for_user(self.request.user, "core.change_compliment")
+
+
+class ComplimentDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = "core/compliment/delete.html"
+    model = Compliment
+    form_class = ComplimentDeleteForm
+    success_url = reverse_lazy("dashboard")
+    slug_field = "uuid"
+    slug_url_kwarg = "uuid"
+
+    def get_queryset(self):
+        return get_objects_for_user(self.request.user, "core.delete_compliment")

@@ -7,8 +7,13 @@
     <div class="container my-4 d-flex flex-column gap-4">
       <div class="d-flex flex-row gap-2 align-items-center flex-wrap">
         <a class="btn btn-primary" href="{% url 'accomplishment_create' %}">Add Accomplishment</a>
-        <a class="btn btn-primary" href="{% url 'accomplishment_list' %}">View All</a>
+        <a class="btn btn-primary" href="{% url 'compliment_create' %}">Add compliment</a>
+        <a class="btn btn-primary" href="{% url 'accomplishment_list' %}">View Accomplishments</a>
       </div>
+
+      <h1>
+        Accomplishments
+      </h1>
 
       <h2>Activity</h2>
       <div class="row flex-nowrap overflow-x-auto">
@@ -29,12 +34,36 @@
           {% empty %}
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
               <div class="alert alert-secondary text-center" role="alert">
-                Nothing to celebrate, yet!
+                Get out there and live your best life 🤩
               </div>
             </div>
           {% endfor %}
         </div>
       {% endfor %}
+
+      <hr>
+
+      <h1>
+        Compliments
+      </h1>
+
+      {% for section in compliment_sections %}
+        <h2>{{ section.title }}</h2>
+        <div class="row flex-nowrap overflow-x-auto">
+          {% for object in section.qs %}
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+              {% include "core/compliment/view_fragment.html" with object=object %}
+            </div>
+          {% empty %}
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+              <div class="alert alert-secondary text-center" role="alert">
+                Nothing here but your good looks 😉
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
     </div>
   </main>
 {% endblock %}

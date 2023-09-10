@@ -38,3 +38,19 @@ class Accomplishment(models.Model):
 
     def __str__(self):
         return f"{self.owner}'s accomplishment {self.uuid}"
+
+
+class Compliment(models.Model):
+    uuid = models.UUIDField(default=uuid4, unique=True, editable=False)
+
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    source = models.TextField(blank=True)
+    description = models.TextField()
+
+    tags = TaggableManager(blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.owner}'s compliment {self.uuid}"

@@ -2,11 +2,12 @@ from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from guardian.shortcuts import assign_perm, remove_perm
 
-from ..models import Accomplishment
+from ..models import Accomplishment, Compliment
 
 
+@receiver(post_save, sender=Compliment)
 @receiver(post_save, sender=Accomplishment)
-def set_permissions(sender, instance: Accomplishment, **kwargs):
+def set_permissions(sender, instance, **kwargs):
     """
     thanks to https://dandavies99.github.io/posts/2021/11/django-permissions/
     """
@@ -21,8 +22,9 @@ def set_permissions(sender, instance: Accomplishment, **kwargs):
     assign_perm(delete, instance.owner, instance)
 
 
+@receiver(post_save, sender=Compliment)
 @receiver(pre_delete, sender=Accomplishment)
-def remove_permissions(sender, instance: Accomplishment, **kwargs):
+def remove_permissions(sender, instance, **kwargs):
     """
     thanks to https://dandavies99.github.io/posts/2021/11/django-permissions/
     """
