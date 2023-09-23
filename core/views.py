@@ -79,9 +79,9 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             },
             {
                 "title": "Throwback",
-                "qs": base_compliment_qs.filter(created_at__lte=week_ago).order_by("?")[
-                    :3
-                ],
+                "qs": base_compliment_qs.filter(
+                    created_at__date__lte=week_ago
+                ).order_by("?")[:3],
             },
         ]
 
