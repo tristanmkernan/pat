@@ -22,7 +22,7 @@ def set_permissions(sender, instance, **kwargs):
     assign_perm(delete, instance.owner, instance)
 
 
-@receiver(post_save, sender=Compliment)
+@receiver(pre_delete, sender=Compliment)
 @receiver(pre_delete, sender=Accomplishment)
 def remove_permissions(sender, instance, **kwargs):
     """

@@ -1,9 +1,10 @@
 from django.contrib import admin
+from guardian.admin import GuardedModelAdmin
 
 from .models import Accomplishment, Compliment
 
 
-class AccomplishmentAdmin(admin.ModelAdmin):
+class AccomplishmentAdmin(GuardedModelAdmin):
     list_display = (
         "uuid",
         "owner",
@@ -14,7 +15,7 @@ class AccomplishmentAdmin(admin.ModelAdmin):
     list_select_related = ("owner",)
 
 
-class ComplimentAdmin(admin.ModelAdmin):
+class ComplimentAdmin(GuardedModelAdmin):
     list_display = (
         "uuid",
         "owner",

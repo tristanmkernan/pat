@@ -4,7 +4,7 @@ import factory
 from django.utils import timezone
 from taggit.models import Tag
 
-from .models import Accomplishment
+from .models import Accomplishment, Compliment
 
 
 class AccomplishmentFactory(factory.django.DjangoModelFactory):
@@ -20,6 +20,14 @@ class AccomplishmentFactory(factory.django.DjangoModelFactory):
     challenge = factory.Faker("pyint", min_value=0, max_value=10)
     reward = factory.Faker("pyint", min_value=0, max_value=10)
     notes = factory.Faker("paragraph")
+
+
+class ComplimentFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Compliment
+
+    source = factory.Faker("name")
+    description = factory.Faker("paragraph")
 
 
 class TagFactory(factory.django.DjangoModelFactory):
