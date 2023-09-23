@@ -15,6 +15,6 @@ else
 fi
 
 python manage.py migrate
-#python manage.py collectstatic --no-input --clear
+python manage.py collectstatic --no-input --clear
 
 litestream replicate --exec="gunicorn --workers=2 --bind=0.0.0.0:8000 pat.wsgi"
