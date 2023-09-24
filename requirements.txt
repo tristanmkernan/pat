@@ -180,6 +180,8 @@ cryptography==40.0.2 ; python_version >= "3.10" and python_version < "4.0" \
 defusedxml==0.7.1 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69 \
     --hash=sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61
+dj-rest-auth==5.0.1 ; python_version >= "3.10" and python_version < "4.0" \
+    --hash=sha256:2f574edd7bcc9a421e6e1d9d47f7b1eb56b71eb797927be135c995ea546dd9b5
 django-allauth==0.56.1 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:347044c4e268e085ef4b4b26ea5fdc9d40576872d55e630f1736e1c9a7761529
 django-anymail[mailersend]==10.1 ; python_version >= "3.10" and python_version < "4.0" \
@@ -212,6 +214,9 @@ django-taggit==3.1.0 ; python_version >= "3.10" and python_version < "4.0" \
 django==4.2 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:ad33ed68db9398f5dfb33282704925bce044bef4261cd4fb59e4e7f9ae505a78 \
     --hash=sha256:c36e2ab12824e2ac36afa8b2515a70c53c7742f0d6eaefa7311ec379558db997
+djangorestframework==3.14.0 ; python_version >= "3.10" and python_version < "4.0" \
+    --hash=sha256:579a333e6256b09489cbe0a067e66abe55c6595d8926be6b99423786334350c8 \
+    --hash=sha256:eb63f58c9f218e1a7d064d17a70751f528ed4e1d35547fdade9aaf4cd103fd08
 factory-boy==3.2.1 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:a98d277b0c047c75eb6e4ab8508a7f81fb03d2cb21986f627913546ef7a2a55e \
     --hash=sha256:eb02a7dd1b577ef606b75a253b9818e6f9eaf996d94449c9d5ebb124f90dc795
@@ -302,6 +307,9 @@ python-decouple==3.8 ; python_version >= "3.10" and python_version < "4.0" \
 python3-openid==3.2.0 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:33fbf6928f401e0b790151ed2b5290b02545e8775f982485205a066f874aaeaf \
     --hash=sha256:6626f771e0417486701e0b4daff762e7212e820ca5b29fcc0d05f6f8736dfa6b
+pytz==2023.3.post1 ; python_version >= "3.10" and python_version < "4.0" \
+    --hash=sha256:7b4fddbeb94a1eba4b557da24f19fdf9db575192544270a9101d8509f9f43d7b \
+    --hash=sha256:ce42d816b81b68506614c11e8937d3aa9e41007ceb50bfdcb0749b921bf646c7
 redis==5.0.0 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:06570d0b2d84d46c21defc550afbaada381af82f5b83e5b3777600e05d8e2ed0 \
     --hash=sha256:5cea6c0d335c9a7332a460ed8729ceabb4d0c489c7285b0a86dbbf8a017bd120
@@ -314,6 +322,9 @@ requests==2.29.0 ; python_version >= "3.10" and python_version < "4.0" \
 s3transfer==0.6.2 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:b014be3a8a2aab98cfe1abc7229cc5a9a0cf05eb9c1f2b86b230fd8df3f78084 \
     --hash=sha256:cab66d3380cca3e70939ef2255d01cd8aece6a4907a9528740f668c4b0611861
+sentry-sdk==1.31.0 ; python_version >= "3.10" and python_version < "4.0" \
+    --hash=sha256:64a7141005fb775b9db298a30de93e3b83e0ddd1232dc6f36eb38aebc1553291 \
+    --hash=sha256:6de2e88304873484207fed836388e422aeff000609b104c802749fd89d56ba5b
 setuptools==67.7.2 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:23aaf86b85ca52ceb801d32703f12d77517b2556af839621c641fca11287952b \
     --hash=sha256:f104fa03692a2602fa0fec6c6a9e63b6c8a968de13e17c026957dd1f53d80990
